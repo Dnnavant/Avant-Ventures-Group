@@ -1,2 +1,2 @@
-# Avant-Ventrues-Group
-Avant Ventrues Group Remake of a website
+# Avant-Ventures-Group
+Avant Ventures Group website 1.0
