@@ -1,72 +1,106 @@
-/* General Styles */
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+:root {
+	/* Color variables */
+	--primary-color: #202020;
+	--text-light: #ffffff;
+	--text-dark: #000000;
+	--accent-blue: rgba(135, 206, 250, 0.5);
+	--bg-light: #f9f9f9;
+
+	/* Common measurements */
+	--container-max-width: 1200px;
+	--section-padding: 4rem;
+}
+
 body {
-	font-family: "Arial", sans-serif;
+	font-family: "Arial", sans-serif; /* Consider using system-ui or a web font */
 	margin: 0;
 	padding: 0;
 	line-height: 1.6;
-	color: #303030;
+	color: var(--text-dark);
+}
+
+/* ==========================================================================
+   Navigation Component
+   ========================================================================== */
+.navbar {
+	width: 100%;
+	background-color: var(--primary-color);
+	padding: 10px;
+	position: fixed;
+	top: 0;
+	z-index: 1000;
 }
 
 .container {
-	width: 100%;
+	max-width: var(--container-max-width);
 	margin: 0 auto;
-}
-
-/* Navigation */
-.navbar {
-	background: #333;
-	color: #fff;
-	padding: 1rem 0;
+	padding: 0 1rem; /* Add padding to prevent content touching edges */
 }
 
 .nav-container {
 	display: flex;
-	justify-content: space-evenly;
 	align-items: center;
+	padding: 0 1rem;
+}
+
+.nav-brand {
+	flex: 0 0 auto;
 }
 
 .brand-link {
-	color: #fff;
-	text-decoration: none;
-	font-size: 2rem;
-	font-weight: bold;
+	display: block;
 }
 
 .brand-logo {
+	max-height: 50px;
 	width: auto;
-	height: 80px;
+	display: block;
+}
+
+.nav-links {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	gap: 4rem;
 }
 
 .nav-links a {
-	color: #fff;
 	text-decoration: none;
-	margin-left: 1.5rem;
+	color: var(--text-light);
+	text-shadow: 0 0 10px var(--accent-blue);
+	font-size: 1.4rem;
+	transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-	text-decoration: underline;
+	text-shadow: 0 0 12px rgba(135, 206, 250, 0.8);
 }
 
-/* Hero Section */
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero {
 	background: #333;
-	color: #fff;
+	color: var(--text-light);
 	padding: 2rem 0;
-	text-align: center;
-	height: calc(100vh - 3.5rem);
+	min-height: 100vh; /* Use min-height instead of calc for better responsiveness */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	overflow: hidden;
+	height: 100vh;
+	width: 100%;
+	margin-top: 80px;
 }
 
+/* Accordion Background Effect */
 .accordion-bg {
 	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	inset: 0; /* Modern alternative to top/left/width/height */
 	display: flex;
 	z-index: 1;
 }
@@ -84,100 +118,118 @@ body {
 	flex: 2;
 }
 
+/* Hero Content */
 .hero-content {
 	position: relative;
 	z-index: 2;
+	padding: 0 1rem; /* Add padding for mobile */
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
 }
 
 .hero h1 {
-	font-size: 2.5rem;
+	font-size: clamp(2rem, 5vw, 2.5rem); /* Responsive font size */
 	margin-bottom: 1rem;
 }
 
 .hero p {
-	font-size: 1.2rem;
+	font-size: clamp(1rem, 3vw, 1.2rem);
 	margin-bottom: 2rem;
 }
 
+/* Call to Action Button */
 .cta-button {
-	background: #fff;
+	display: inline-block;
+	background: var(--text-light);
 	color: #007bff;
 	padding: 0.75rem 1.5rem;
 	text-decoration: none;
 	border-radius: 5px;
 	font-weight: bold;
+	transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
 	background: #f0f0f0;
 }
 
-/* Services Section */
+/* ==========================================================================
+   Services Section
+   ========================================================================== */
 .services {
 	min-height: 100vh;
-	padding: 4rem 0;
+	padding: var(--section-padding) 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-}
-
-.services h2 {
-	text-align: center;
-	margin-bottom: 2rem;
+	height: 100vh;
+	width: 100%;
+	padding: 0;
 }
 
 .services-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 2rem;
+	padding: 0 1rem;
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
 }
 
 .service-card {
-	background: #fff;
+	background: var(--text-light);
 	padding: 1.5rem;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	text-align: center;
+	transition: transform 0.3s ease;
 }
 
-.service-card h3 {
-	font-size: 1.5rem;
-	margin-bottom: 1rem;
+.service-card:hover {
+	transform: translateY(-5px);
 }
 
-/* About Section */
+/* ==========================================================================
+   About Section
+   ========================================================================== */
 .about {
 	min-height: 100vh;
-	padding: 4rem 0;
-	text-align: center;
+	padding: var(--section-padding) 0;
+	background-color: var(--bg-light);
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	background-color: #f9f9f9;
+	height: 100vh;
+	width: 100%;
+	padding: 0;
 }
 
-.about h2 {
-	margin-bottom: 1.5rem;
-}
-
-/* Contact Section */
+/* ==========================================================================
+   Contact Section
+   ========================================================================== */
 .contact {
 	min-height: 100vh;
-	padding: 4rem 0;
-	background: #ffffff;
+	padding: var(--section-padding) 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-}
-
-.contact h2 {
-	text-align: center;
-	margin-bottom: 2rem;
+	height: 100vh;
+	width: 100%;
+	padding: 0;
 }
 
 .contact-form {
 	max-width: 600px;
 	margin: 0 auto;
+	padding: 0 1rem;
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
 }
 
 .form-group {
@@ -190,56 +242,44 @@ body {
 	padding: 0.75rem;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+	transition: border-color 0.3s ease;
 }
 
-.form-group textarea {
-	resize: vertical;
+.form-group input:focus,
+.form-group textarea:focus {
+	outline: none;
+	border-color: #007bff;
 }
 
-/* Footer */
-.footer {
-	background: #333;
-	color: #fff;
-	text-align: center;
-	padding: 1rem 0;
-}
-
-/* Gallery Section */
+/* ==========================================================================
+   Gallery Section
+   ========================================================================== */
 .gallery {
 	min-height: 100vh;
-	padding: 50px 0;
-	background-color: #f9f9f9;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.gallery h2 {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.gallery p {
-	text-align: center;
-	margin-bottom: 40px;
+	padding: var(--section-padding) 0;
+	background-color: var(--bg-light);
+	height: 100vh;
+	width: 100%;
+	padding: 0;
 }
 
 .gallery-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	gap: 20px;
-	padding: 20px 0;
+	padding: 20px 1rem;
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
 }
 
 .gallery-item {
 	position: relative;
-	overflow: hidden;
 	border-radius: 8px;
+	overflow: hidden;
 	transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-	transform: scale(1.05);
 }
 
 .gallery-item img {
@@ -249,21 +289,82 @@ body {
 	aspect-ratio: 1;
 }
 
-.gallery-page {
-	padding: 80px 0;
-}
-
-.gallery-page h1 {
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+	background: #333;
+	color: var(--text-light);
 	text-align: center;
-	margin-bottom: 30px;
+	padding: 1rem 0;
 }
 
-.gallery-page p {
-	text-align: center;
-	margin-bottom: 40px;
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media (max-width: 768px) {
+	.nav-links {
+		gap: 2rem;
+	}
+
+	.nav-links a {
+		font-size: 1.1rem;
+	}
 }
 
-.gallery-page .gallery-grid {
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-	gap: 30px;
+/* ==========================================================================
+   Common Section Styles
+   ========================================================================== */
+.hero-section,
+.services-section,
+.about-section,
+.contact-section,
+.gallery-section {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+/* First section adjustment for navbar */
+.hero-section {
+	margin-top: 80px; /* Adjust based on navbar height */
+}
+
+/* Content containers */
+.container {
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
+}
+
+/* Section-specific styles can go here */
+.hero-section {
+	background: #333;
+	color: var(--text-light);
+	position: relative;
+}
+
+.services-section {
+	background-color: var(--bg-light);
+}
+
+.about-section {
+	background-color: var(--primary-color);
+	color: var(--text-light);
+}
+
+.contact-section {
+	background-color: var(--bg-light);
+}
+
+.gallery-section {
+	background-color: var(--primary-color);
+	color: var(--text-light);
 }
