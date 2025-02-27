@@ -26,3 +26,29 @@ const feed = new Instafeed({
 
 // Run the feed
 feed.run();
+
+document.addEventListener("DOMContentLoaded", function () {
+	// Handle scroll effects
+	window.addEventListener("scroll", function () {
+		const navbar = document.querySelector(".navbar");
+		if (window.scrollY > 50) {
+			navbar.classList.add("scrolled");
+		} else {
+			navbar.classList.remove("scrolled");
+		}
+	});
+
+	// Handle mobile menu
+	const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+	const navLinks = document.querySelector(".nav-links");
+
+	mobileMenuToggle.addEventListener("click", function () {
+		navLinks.classList.toggle("active");
+		mobileMenuToggle.setAttribute(
+			"aria-expanded",
+			mobileMenuToggle.getAttribute("aria-expanded") === "false"
+				? "true"
+				: "false"
+		);
+	});
+});

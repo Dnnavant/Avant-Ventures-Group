@@ -28,21 +28,28 @@ body {
 .navbar {
 	width: 100%;
 	background-color: var(--primary-color);
-	padding: 10px;
 	position: fixed;
 	top: 0;
 	z-index: 1000;
+	transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.navbar.scrolled {
+	background-color: rgba(32, 32, 32, 0.95);
+	padding: 0.5rem 0;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .container {
 	max-width: var(--container-max-width);
 	margin: 0 auto;
-	padding: 0 1rem; /* Add padding to prevent content touching edges */
+	padding: 0 .75rem; /* Add padding to prevent content touching edges */
 }
 
 .nav-container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	padding: 0 1rem;
 }
 
@@ -64,7 +71,7 @@ body {
 	flex: 1;
 	display: flex;
 	justify-content: center;
-	gap: 4rem;
+	gap: 4.5rem;
 }
 
 .nav-links a {
@@ -77,6 +84,46 @@ body {
 
 .nav-links a:hover {
 	text-shadow: 0 0 12px rgba(135, 206, 250, 0.8);
+}
+
+.nav-links a.active {
+	position: relative;
+	font-weight: bold;
+}
+
+.nav-links a.active::after {
+	content: "";
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: var(--text-light);
+	box-shadow: 0 0 8px var(--accent-blue);
+}
+
+.nav-cta {
+	position: absolute;
+	top: 45px; /* Position below hamburger */
+	right: 2.5rem; /* Align with right edge */
+	margin-left: 0;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-cta-button {
+	background-color: transparent;
+	border: 2px solid var(--text-light);
+	color: var(--text-light);
+	padding: 0.5rem 1.2rem;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: bold;
+	transition: all 0.3s ease;
+}
+
+.nav-cta-button:hover {
+	background-color: var(--text-light);
+	color: var(--primary-color);
 }
 
 /* ==========================================================================
@@ -300,15 +347,88 @@ body {
 }
 
 /* ==========================================================================
-   Media Queries
+   Media Queries - All responsive design styles
    ========================================================================== */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+	/* Navigation responsive styles */
+	.nav-container {
+		position: relative; /* For absolute positioning of children */
+	}
+
 	.nav-links {
 		gap: 2rem;
+		font-size: 1.1rem;
+		position: fixed;
+		top: 80px; /* Adjust to match navbar height */
+		left: 0;
+		width: 100%;
+		background-color: var(--primary-color);
+		flex-direction: column;
+		align-items: center;
+		padding: 1rem 0;
+		transform: translateY(-100%);
+		opacity: 0;
+		transition: all 0.3s ease;
+		pointer-events: none;
+		z-index: 1000;
+	}
+
+	.nav-links.active {
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: all;
 	}
 
 	.nav-links a {
 		font-size: 1.1rem;
+	}
+
+	/* Mobile menu toggle */
+	.mobile-menu-toggle {
+		display: flex;
+		margin-left: auto; /* Push to right side */
+	}
+
+	/* CTA positioning */
+	.nav-cta {
+		position: absolute;
+		top: 95px; /* Position below hamburger */
+		right: 2rem; /* Align with right edge */
+		margin-left: 0;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	/* This is the key part - hide CTA when menu is active */
+	.nav-links.active ~ .nav-cta,
+	body.menu-open .nav-cta {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	/* Services grid responsive layout */
+	.services-grid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	/* Gallery grid responsive layout */
+	.gallery-grid {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
+}
+
+/* Smaller mobile devices - also update this breakpoint if needed */
+@media (max-width: 480px) {
+	.hero h1 {
+		font-size: 1.8rem;
+	}
+
+	.hero p {
+		font-size: 1rem;
+	}
+
+	.container {
+		padding: 1rem;
 	}
 }
 
@@ -367,4 +487,21 @@ body {
 .gallery-section {
 	background-color: var(--primary-color);
 	color: var(--text-light);
+}
+
+/* Add to your existing CSS */
+.mobile-menu-toggle {
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 30px;
+	height: 21px;
+	cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+	height: 3px;
+	width: 100%;
+	background-color: var(--text-light);
+	border-radius: 3px;
 }
