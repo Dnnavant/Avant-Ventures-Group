@@ -43,7 +43,7 @@ body {
 .container {
 	max-width: var(--container-max-width);
 	margin: 0 auto;
-	padding: 0 .75rem; /* Add padding to prevent content touching edges */
+	padding: 0 0.75rem; /* Add padding to prevent content touching edges */
 }
 
 .nav-container {
@@ -169,38 +169,94 @@ body {
 .hero-content {
 	position: relative;
 	z-index: 2;
-	padding: 0 1rem; /* Add padding for mobile */
 	width: 100%;
 	max-width: var(--container-max-width);
 	margin: 0 auto;
-	padding: 2rem;
+	padding: 1rem;
 	box-sizing: border-box;
+	text-align: center;
 }
 
-.hero h1 {
-	font-size: clamp(2rem, 5vw, 2.5rem); /* Responsive font size */
-	margin-bottom: 1rem;
-}
-
-.hero p {
-	font-size: clamp(1rem, 3vw, 1.2rem);
+.content-backdrop {
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 2rem;
+	border-radius: 10px;
+	backdrop-filter: blur(5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.05);
+	display: inline-block;
+	max-width: 90%;
 	margin-bottom: 2rem;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-container {
+	position: relative;
+	z-index: 2;
+}
+
+.content-backdrop::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.7) 0%,
+		rgba(0, 0, 0, 0.4) 100%
+	);
+	z-index: 1;
+}
+
+.text-container h1,
+.text-container p {
+	color: var(--text-light);
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+	margin: 0 auto;
+	position: relative;
+}
+
+.text-container h1 {
+	margin-bottom: 1rem;
+	font-size: clamp(2rem, 5vw, 3rem);
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+.text-container p {
+	font-size: clamp(1rem, 3vw, 1.3rem);
+}
+
+.hero-content .cta-button {
+	margin-top: 1.5rem;
+	position: relative;
+	z-index: 3;
 }
 
 /* Call to Action Button */
 .cta-button {
 	display: inline-block;
 	background: var(--text-light);
-	color: #007bff;
-	padding: 0.75rem 1.5rem;
+	color: var(--primary-color);
+	padding: 0.85rem 2rem;
 	text-decoration: none;
 	border-radius: 5px;
 	font-weight: bold;
-	transition: background-color 0.3s ease;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
+	font-size: 1.1rem;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cta-button:hover {
-	background: #f0f0f0;
+	background: var(--accent-blue);
+	color: var(--text-light);
+	border-color: var(--text-light);
+	transform: translateY(-3px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================================================================
@@ -214,6 +270,7 @@ body {
 	height: 100vh;
 	width: 100%;
 	padding: 0;
+	/* box-sizing: 0 10px 20px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .services-grid {
@@ -448,6 +505,9 @@ body {
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
+	position: relative; /* Added for shadow positioning */
+	box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) inset,
+		0 10px 30px rgba(0, 0, 0, 0.15) inset; /* Inset shadow at top and bottom */
 }
 
 /* First section adjustment for navbar */
@@ -487,6 +547,48 @@ body {
 .gallery-section {
 	background-color: var(--primary-color);
 	color: var(--text-light);
+}
+
+/* Add a gradient overlay for better section blending */
+.hero-section::after,
+.services-section::after,
+.about-section::after,
+.contact-section::after,
+.gallery-section::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 60px;
+	pointer-events: none;
+	z-index: 5;
+}
+
+/* Top gradient for blending with section above */
+.hero-section::before,
+.services-section::before,
+.about-section::before,
+.contact-section::before,
+.gallery-section::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+	pointer-events: none;
+	z-index: 5;
+}
+
+/* Bottom gradient for blending with section below */
+.hero-section::after,
+.services-section::after,
+.about-section::after,
+.contact-section::after,
+.gallery-section::after {
+	bottom: 0;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
 }
 
 /* Add to your existing CSS */
