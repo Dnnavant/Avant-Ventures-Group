@@ -427,6 +427,146 @@ body {
 	padding: 0;
 }
 
+.about-section {
+	background-color: var(--secondary-color);
+	color: var(--text-dark);
+	padding: 5rem 0;
+	position: relative;
+}
+
+/**
+ * Section heading
+ */
+.about-section h2 {
+	text-align: center;
+	margin-bottom: 3rem;
+	font-size: 2.5rem;
+	color: var(--primary-color);
+	position: relative;
+}
+
+.about-section h2::after {
+	content: "";
+	position: absolute;
+	bottom: -15px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 3px;
+	background-color: var(--accent-blue);
+}
+
+/**
+ * Introduction paragraph
+ */
+.about-intro {
+	max-width: 800px;
+	margin: 0 auto 4rem;
+	text-align: center;
+	font-size: 1.2rem;
+	line-height: 1.8;
+	color: var(--text-dark);
+}
+
+/**
+ * Grid layout for about cards
+ */
+.about-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+	margin-bottom: 4rem;
+}
+
+/**
+ * Individual about cards
+ */
+.about-card {
+	background-color: white;
+	padding: 2rem;
+	border-radius: 10px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/**
+ * Card icons
+ */
+.card-icon {
+	font-size: 2rem;
+	color: var(--accent-blue);
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+/**
+ * Card headings
+ */
+.about-card h3 {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+	color: var(--primary-color);
+}
+
+/**
+ * Card paragraphs
+ */
+.about-card p {
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 1rem;
+}
+
+.about-card p:last-child {
+	margin-bottom: 0;
+}
+
+/**
+ * Call to Action section
+ */
+.about-cta {
+	text-align: center;
+	padding: 3rem 0 1rem;
+}
+
+.about-cta h3 {
+	font-size: 1.8rem;
+	margin-bottom: 2rem;
+	color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+	.about-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.about-intro {
+		padding: 0 1rem;
+		font-size: 1.1rem;
+	}
+
+	.about-card {
+		margin: 0 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.about-section h2 {
+		font-size: 2rem;
+	}
+
+	.about-cta h3 {
+		font-size: 1.5rem;
+	}
+}
+
+
 /* ==========================================================================
    Contact Section
    ========================================================================== */
