@@ -268,6 +268,27 @@ body {
 	position: relative;
 }
 
+/* Individual accordion item background images */
+.accordion-item:nth-child(1) {
+	background-image: url("./images/image2.jpg");
+}
+
+.accordion-item:nth-child(2) {
+	background-image: url("./images/image4.jpg");
+}
+
+.accordion-item:nth-child(3) {
+	background-image: url("./images/image3.jpg");
+}
+
+.accordion-item:nth-child(4) {
+	background-image: url("./images/image1.jpg");
+}
+
+.accordion-item:nth-child(5) {
+	background-image: url("./images/image5.jpg");
+}
+
 .accordion-item:hover {
 	flex: 2;
 }
@@ -565,7 +586,6 @@ body {
 		font-size: 1.5rem;
 	}
 }
-
 
 /* ==========================================================================
    Contact Section
