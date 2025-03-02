@@ -1,10 +1,29 @@
-// Example: Smooth scrolling for anchor links
+// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 	anchor.addEventListener("click", function (e) {
 		e.preventDefault();
-		document.querySelector(this.getAttribute("href")).scrollIntoView({
-			behavior: "smooth",
-		});
+
+		// Get the target element
+		const targetId = this.getAttribute("href");
+
+		// Skip if it's just "#" (to avoid scrolling to the top)
+		if (targetId === "#") return;
+
+		const targetElement = document.querySelector(targetId);
+
+		// Only scroll if the element exists
+		if (targetElement) {
+			targetElement.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+
+			// Update active state in navigation
+			document.querySelectorAll(".nav-links a").forEach((link) => {
+				link.classList.remove("active");
+			});
+			this.classList.add("active");
+		}
 	});
 });
 
@@ -50,5 +69,40 @@ document.addEventListener("DOMContentLoaded", function () {
 				? "true"
 				: "false"
 		);
+	});
+});
+
+// Testimonials Navigation
+document.addEventListener("DOMContentLoaded", function () {
+	const prevButton = document.querySelector(".testimonial-navigation .prev");
+	const nextButton = document.querySelector(".testimonial-navigation .next");
+	const currentPageEl = document.querySelector(".current-page");
+	const totalPagesEl = document.querySelector(".total-pages");
+
+	// Set up mock data for additional testimonials (for demo purposes)
+	const totalPages = 3;
+	let currentPage = 1;
+
+	// Update pagination display
+	totalPagesEl.textContent = totalPages;
+	currentPageEl.textContent = currentPage;
+
+	// Handle navigation clicks
+	prevButton.addEventListener("click", function () {
+		if (currentPage > 1) {
+			currentPage--;
+			currentPageEl.textContent = currentPage;
+			// In a real implementation, you would load the previous set of testimonials here
+			// For demo purposes, we're just updating the page number
+		}
+	});
+
+	nextButton.addEventListener("click", function () {
+		if (currentPage < totalPages) {
+			currentPage++;
+			currentPageEl.textContent = currentPage;
+			// In a real implementation, you would load the next set of testimonials here
+			// For demo purposes, we're just updating the page number
+		}
 	});
 });

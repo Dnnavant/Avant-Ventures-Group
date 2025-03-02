@@ -3,7 +3,8 @@
    ========================================================================== */
 :root {
 	/* Color variables */
-	--primary-color: #202020;
+	--primary-color: #333;
+	--secondary-color: #ffffff;
 	--text-light: #ffffff;
 	--text-dark: #000000;
 	--accent-blue: rgba(135, 206, 250, 0.5);
@@ -15,11 +16,106 @@
 }
 
 body {
-	font-family: "Arial", sans-serif; /* Consider using system-ui or a web font */
+	font-family: "Arial", sans-serif;
 	margin: 0;
 	padding: 0;
 	line-height: 1.6;
 	color: var(--text-dark);
+}
+
+/* ==========================================================================
+   Common Section Styles
+   ========================================================================== */
+.hero-section,
+.services-section,
+.about-section,
+.contact-section,
+.gallery-section {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) inset,
+		0 10px 30px rgba(0, 0, 0, 0.15) inset;
+}
+
+/* First section adjustment for navbar */
+.hero-section {
+	margin-top: 80px;
+}
+
+/* Content containers */
+.container {
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 2rem;
+	box-sizing: border-box;
+}
+
+/* Section-specific styles */
+.hero-section {
+	background-color: var(--primary-color);
+	color: var(--text-light);
+	position: relative;
+}
+
+.services-section {
+	background-color: var(--primary-color);
+	color: var(--text-light);
+}
+
+.about-section {
+	background-color: var(--primary-color);
+	color: var(--text-light);
+}
+
+.contact-section {
+	background-color: var(--secondary-color);
+	color: var(--text-dark);
+}
+
+.gallery-section {
+	background-color: var(--secondary-color);
+	color: var(--text-dark);
+}
+
+/* Gradient overlays for section blending */
+.hero-section::before,
+.services-section::before,
+.about-section::before,
+.contact-section::before,
+.gallery-section::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
+	pointer-events: none;
+	z-index: 5;
+}
+
+.hero-section::after,
+.services-section::after,
+.about-section::after,
+.contact-section::after,
+.gallery-section::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+	pointer-events: none;
+	z-index: 5;
 }
 
 /* ==========================================================================
@@ -40,17 +136,11 @@ body {
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.container {
-	max-width: var(--container-max-width);
-	margin: 0 auto;
-	padding: 0 0.75rem; /* Add padding to prevent content touching edges */
-}
-
 .nav-container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 1rem;
+	padding: 1rem 3rem;
 }
 
 .nav-brand {
@@ -104,8 +194,8 @@ body {
 
 .nav-cta {
 	position: absolute;
-	top: 45px; /* Position below hamburger */
-	right: 2.5rem; /* Align with right edge */
+	top: 30px;
+	right: 2.5rem;
 	margin-left: 0;
 	transition: opacity 0.3s ease, visibility 0.3s ease;
 }
@@ -114,7 +204,7 @@ body {
 	background-color: transparent;
 	border: 2px solid var(--text-light);
 	color: var(--text-light);
-	padding: 0.5rem 1.2rem;
+	padding: 0.5rem 1.5rem;
 	border-radius: 4px;
 	text-decoration: none;
 	font-weight: bold;
@@ -126,6 +216,23 @@ body {
 	color: var(--primary-color);
 }
 
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 30px;
+	height: 21px;
+	cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+	height: 3px;
+	width: 100%;
+	background-color: var(--text-light);
+	border-radius: 3px;
+}
+
 /* ==========================================================================
    Hero Section
    ========================================================================== */
@@ -133,7 +240,7 @@ body {
 	background: #333;
 	color: var(--text-light);
 	padding: 2rem 0;
-	min-height: 100vh; /* Use min-height instead of calc for better responsiveness */
+	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -147,7 +254,7 @@ body {
 /* Accordion Background Effect */
 .accordion-bg {
 	position: absolute;
-	inset: 0; /* Modern alternative to top/left/width/height */
+	inset: 0;
 	display: flex;
 	z-index: 1;
 }
@@ -172,7 +279,7 @@ body {
 	width: 100%;
 	max-width: var(--container-max-width);
 	margin: 0 auto;
-	padding: 1rem;
+	padding: 2rem;
 	box-sizing: border-box;
 	text-align: center;
 }
@@ -180,11 +287,11 @@ body {
 .content-backdrop {
 	background-color: rgba(0, 0, 0, 0.6);
 	padding: 2rem;
-	border-radius: 10px;
+	border-radius: 8px;
 	backdrop-filter: blur(5px);
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.05);
 	display: inline-block;
-	max-width: 90%;
+	max-width: 80%;
 	margin-bottom: 2rem;
 	position: relative;
 	overflow: hidden;
@@ -270,14 +377,13 @@ body {
 	height: 100vh;
 	width: 100%;
 	padding: 0;
-	/* box-sizing: 0 10px 20px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .services-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, auto);
 	gap: 2rem;
-	padding: 0 1rem;
 	width: 100%;
 	max-width: var(--container-max-width);
 	margin: 0 auto;
@@ -286,16 +392,25 @@ body {
 }
 
 .service-card {
-	background: var(--text-light);
+	background: rgba(255, 255, 255, 0.9);
 	padding: 1.5rem;
 	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	text-align: center;
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	color: var(--text-dark);
 }
 
 .service-card:hover {
 	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Center section headings */
+.services-section h2 {
+	color: var(--text-light);
+	text-align: center;
+	margin-bottom: 2rem;
 }
 
 /* ==========================================================================
@@ -344,15 +459,17 @@ body {
 .form-group textarea {
 	width: 100%;
 	padding: 0.75rem;
-	border: 1px solid #ccc;
+	border: 1px solid #f5f5f5;
 	border-radius: 5px;
 	transition: border-color 0.3s ease;
+	background-color: #f5f5f5;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
 	outline: none;
-	border-color: #007bff;
+	border-color: var(--primary-color);
+	box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
 }
 
 /* ==========================================================================
@@ -397,10 +514,176 @@ body {
    Footer
    ========================================================================== */
 .footer {
-	background: #333;
+	background-color: var(--primary-color);
 	color: var(--text-light);
 	text-align: center;
-	padding: 1rem 0;
+	padding: 0.5rem 0;
+}
+
+/* ==========================================================================
+   Testimonials Section
+   ========================================================================== */
+.testimonials-section {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+	background-color: var(--secondary-color);
+	color: var(--text-dark);
+	box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) inset,
+		0 10px 30px rgba(0, 0, 0, 0.15) inset;
+}
+
+.testimonials-section h2 {
+	text-align: center;
+	margin-bottom: 3rem;
+	font-size: 2.5rem;
+	color: var(--text-dark);
+	position: relative;
+}
+
+.testimonials-section h2::after {
+	content: "";
+	position: absolute;
+	bottom: -15px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 3px;
+	background-color: var(--accent-blue);
+}
+
+.testimonials-container {
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+}
+
+.testimonials-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.testimonial-card {
+	background-color: white;
+	border-radius: 10px;
+	padding: 2rem;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.testimonial-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 1.5rem;
+}
+
+.testimonial-info h3 {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.3rem;
+	color: var(--primary-color);
+}
+
+.service-used {
+	font-size: 0.9rem;
+	color: #666;
+	margin: 0;
+}
+
+.testimonial-rating {
+	color: #ffc107;
+	font-size: 1.2rem;
+	letter-spacing: 2px;
+}
+
+.star.half {
+	position: relative;
+	display: inline-block;
+}
+
+.star.half::after {
+	content: "☆";
+	position: absolute;
+	left: 0;
+	color: #ffc107;
+	width: 50%;
+	overflow: hidden;
+}
+
+.testimonial-content {
+	flex-grow: 1;
+	font-style: italic;
+	color: #555;
+	line-height: 1.6;
+}
+
+.testimonial-content p {
+	margin: 0;
+}
+
+.testimonial-content p::before {
+	content: ""
+		";
+	font-size: 1.5em;
+	color: #ddd;
+	margin-right: 0.2em;
+}
+
+.testimonial-content p::after {
+	content: "
+		"";
+	font-size: 1.5em;
+	color: #ddd;
+	margin-left: 0.2em;
+}
+
+.testimonial-navigation {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.nav-button {
+	background-color: white;
+	border: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+	background-color: var(--primary-color);
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pagination {
+	font-size: 1rem;
+	color: #666;
 }
 
 /* ==========================================================================
@@ -409,14 +692,14 @@ body {
 @media (max-width: 900px) {
 	/* Navigation responsive styles */
 	.nav-container {
-		position: relative; /* For absolute positioning of children */
+		position: relative;
 	}
 
 	.nav-links {
 		gap: 2rem;
 		font-size: 1.1rem;
 		position: fixed;
-		top: 80px; /* Adjust to match navbar height */
+		top: 80px;
 		left: 0;
 		width: 100%;
 		background-color: var(--primary-color);
@@ -443,19 +726,19 @@ body {
 	/* Mobile menu toggle */
 	.mobile-menu-toggle {
 		display: flex;
-		margin-left: auto; /* Push to right side */
+		margin-left: auto;
 	}
 
 	/* CTA positioning */
 	.nav-cta {
 		position: absolute;
-		top: 95px; /* Position below hamburger */
-		right: 2rem; /* Align with right edge */
+		top: 95px;
+		right: 2rem;
 		margin-left: 0;
 		transition: opacity 0.3s ease, visibility 0.3s ease;
 	}
 
-	/* This is the key part - hide CTA when menu is active */
+	/* Hide CTA when menu is active */
 	.nav-links.active ~ .nav-cta,
 	body.menu-open .nav-cta {
 		opacity: 0;
@@ -472,9 +755,14 @@ body {
 	.gallery-grid {
 		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	}
+
+	/* Testimonials grid responsive layout */
+	.testimonials-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
-/* Smaller mobile devices - also update this breakpoint if needed */
+/* Smaller mobile devices */
 @media (max-width: 480px) {
 	.hero h1 {
 		font-size: 1.8rem;
@@ -487,123 +775,4 @@ body {
 	.container {
 		padding: 1rem;
 	}
-}
-
-/* ==========================================================================
-   Common Section Styles
-   ========================================================================== */
-.hero-section,
-.services-section,
-.about-section,
-.contact-section,
-.gallery-section {
-	height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-	position: relative; /* Added for shadow positioning */
-	box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15) inset,
-		0 10px 30px rgba(0, 0, 0, 0.15) inset; /* Inset shadow at top and bottom */
-}
-
-/* First section adjustment for navbar */
-.hero-section {
-	margin-top: 80px; /* Adjust based on navbar height */
-}
-
-/* Content containers */
-.container {
-	width: 100%;
-	max-width: var(--container-max-width);
-	margin: 0 auto;
-	padding: 2rem;
-	box-sizing: border-box;
-}
-
-/* Section-specific styles can go here */
-.hero-section {
-	background: #333;
-	color: var(--text-light);
-	position: relative;
-}
-
-.services-section {
-	background-color: var(--bg-light);
-}
-
-.about-section {
-	background-color: var(--primary-color);
-	color: var(--text-light);
-}
-
-.contact-section {
-	background-color: var(--bg-light);
-}
-
-.gallery-section {
-	background-color: var(--primary-color);
-	color: var(--text-light);
-}
-
-/* Add a gradient overlay for better section blending */
-.hero-section::after,
-.services-section::after,
-.about-section::after,
-.contact-section::after,
-.gallery-section::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	height: 60px;
-	pointer-events: none;
-	z-index: 5;
-}
-
-/* Top gradient for blending with section above */
-.hero-section::before,
-.services-section::before,
-.about-section::before,
-.contact-section::before,
-.gallery-section::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 60px;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
-	pointer-events: none;
-	z-index: 5;
-}
-
-/* Bottom gradient for blending with section below */
-.hero-section::after,
-.services-section::after,
-.about-section::after,
-.contact-section::after,
-.gallery-section::after {
-	bottom: 0;
-	background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
-}
-
-/* Add to your existing CSS */
-.mobile-menu-toggle {
-	display: none;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 30px;
-	height: 21px;
-	cursor: pointer;
-}
-
-.mobile-menu-toggle span {
-	height: 3px;
-	width: 100%;
-	background-color: var(--text-light);
-	border-radius: 3px;
 }
